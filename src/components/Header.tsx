@@ -10,7 +10,7 @@ export default function Header() {
             {/* Logo */}
             <div className="w-14 h-14 md:w-16 md:h-16 bg-black rounded-xl flex items-center justify-center shadow-sm">
               <img
-                src="/JOSH CREATIVES LOGO.png"
+                src="JOSH CREATIVES LOGO.png"
                 alt="Josh Creatives Logo"
                 className="w-full h-full object-contain p-2"
               />
