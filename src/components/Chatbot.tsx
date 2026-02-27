@@ -147,7 +147,7 @@ export default function Chatbot() {
     "Are you available for freelance?",
     "Show me your web development work",
     "Do you edit videos?",
-    "How long does a website take?",
+    "How long does a website take??",
   ];
 
   return (
