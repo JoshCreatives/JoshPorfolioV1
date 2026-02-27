@@ -147,7 +147,7 @@ export default function Chatbot() {
     "Are you available for freelance?",
     "Show me your web development work",
     "Do you edit videos?",
-    "How long does a website take??",
+    "How long does a website take?",
   ];
 
   return (
@@ -155,7 +155,7 @@ export default function Chatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-900 transition-all hover:scale-110 z-50 group border border-gray-800"
+          className="fixed bottom-6 right-6 md:right-6 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-900 transition-all hover:scale-110 z-50 group border border-gray-800"
           aria-label="Open chat"
         >
           <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform" />
@@ -163,7 +163,7 @@ export default function Chatbot() {
       )}
 
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-96 h-[600px] bg-black rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-800 overflow-hidden">
+        <div className="fixed inset-x-4 bottom-4 md:inset-auto md:bottom-6 md:right-6 md:w-96 md:h-[600px] bg-black rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-800 overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-gray-900 to-black text-white p-4 border-b border-gray-800">
             <div className="flex items-center justify-between">
