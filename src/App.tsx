@@ -12,7 +12,8 @@ import Chatbot from './components/Chatbot';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white px-[100px]">
+    <div className="min-h-screen bg-white">
+    <div className="px-4 md:px-[100px]"></div>
       <Header />
       <About />
       {/* <TechStackExperience /> */}
