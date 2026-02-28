@@ -17,3 +17,31 @@ section {
 section:not(:last-child) {
   border-bottom: 1px solid #f0f0f0 !important;
 }
+/* In your index.css or App.css */
+
+@font-face {
+  font-family: 'SpyAgency';
+  src: url('/fonts/SpyAgency.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* If you have bold version */
+@font-face {
+  font-family: 'SpyAgency';
+  src: url('/fonts/SpyAgency-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apply to body or specific elements */
+body {
+  font-family: 'SpyAgency', sans-serif;
+}
+
+/* Or if you want to apply only to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'SpyAgency', sans-serif;
+}

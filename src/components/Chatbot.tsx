@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Sparkles, Code, Palette, Video, Globe } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Code, Palette, Video, Globe, Calendar, Mail, ExternalLink, Heart } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -13,7 +13,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "👋 Hi! I'm the Josh Creatives AI assistant. I can tell you all about our web development, WordPress, graphic design, and motion video editing services. What would you like to know?",
+      text: "👋 Hi! I'm the Josh Creatives AI assistant. I can tell you all about our web development, WordPress, graphic design, and motion video editing services. Would you like to know more or commission a project?",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -32,10 +32,62 @@ export default function Chatbot() {
 
   const getBotResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
+    
+    // Check for off-topic questions (love, life, philosophy, etc.)
+    const offTopicKeywords = [
+      'love', 'life', 'meaning', 'philosophy', 'universe', 'god', 'religion',
+      'politics', 'weather', 'sports', 'game', 'movie', 'song', 'music',
+      'food', 'recipe', 'travel', 'vacation', 'pet', 'animal', 'friend',
+      'family', 'relationship', 'emotion', 'feeling', 'happiness', 'sad',
+      'joke', 'funny', 'dance', 'party', 'sleep', 'dream', 'death'
+    ];
+    
+    const isOffTopic = offTopicKeywords.some(keyword => lowerMessage.includes(keyword)) && 
+                      !lowerMessage.includes('website') && 
+                      !lowerMessage.includes('design') && 
+                      !lowerMessage.includes('video') &&
+                      !lowerMessage.includes('wordpress') &&
+                      !lowerMessage.includes('project') &&
+                      !lowerMessage.includes('price') &&
+                      !lowerMessage.includes('cost');
+    
+    // Specific check for "what is love"
+    if (lowerMessage.includes('what is love') || lowerMessage.includes('love')) {
+      return "🥹 Aww that's a beautiful question! While I'd love to chat about life's mysteries, I'm actually here to tell you all about Josh Creatives! I can help with information about web development, design, video editing, or commissioning a project. Is there something creative I can help you with today? 💙";
+    }
+
+    // Off-topic response
+    if (isOffTopic) {
+      const offTopicResponses = [
+        "😊 That's an interesting question! But I'm just a simple AI assistant here to talk about Josh Creatives. I can tell you about web development, design, video editing, or how to commission a project. What creative service are you interested in?",
+        
+        "🤗 I wish I could chat about everything, but my expertise is all about Josh Creatives! I can help with questions about websites, branding, video editing, or starting a project. What brings you here today?",
+        
+        "💭 Deep thoughts! While I enjoy them, I'm actually programmed to help with Josh Creatives info. Want to know about our web development, design services, or how to work together?",
+        
+        "✨ That's a great question for a philosopher! Me? I'm just here to talk about Josh Creatives and all things creative. Need help with a website, design project, or video?",
+        
+        "😂 You're funny! I wish I could answer that, but I'm a focused AI assistant for Josh Creatives. I can tell you about web development, WordPress, design, or video editing though!",
+        
+        "🥰 That's sweet! But let's get back to creativity - I can help with questions about Josh Creatives' services, pricing, or portfolio. What would you like to know?"
+      ];
+      
+      return offTopicResponses[Math.floor(Math.random() * offTopicResponses.length)];
+    }
 
     // Greetings
     if (lowerMessage.match(/^(hello|hi|hey|greetings|good morning|good afternoon|good evening)/)) {
       return "Hello there! 👋 I'm here to help you learn about Josh Creatives. We specialize in web development, WordPress, graphic design, and motion video editing. What creative project are you working on?";
+    }
+
+    // Commission / Hire / Work Together
+    if (lowerMessage.includes('commission') || lowerMessage.includes('hire') || lowerMessage.includes('work together') || lowerMessage.includes('project') || lowerMessage.includes('collaborate') || lowerMessage.includes('quote') || lowerMessage.includes('estimate')) {
+      return "🎨 **Ready to start a project?**\n\nI'd love to help! Here's how you can commission Josh Creatives:\n\n📧 **Email:** josh@joshcreatives.com\n📞 **Schedule a Call:** Click the button below\n💬 **Tell me about your project:** What do you need help with?\n\nI typically respond within 24 hours. Let's create something amazing together! ✨";
+    }
+
+    // Contact Information
+    if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach') || lowerMessage.includes('message') || lowerMessage.includes('get in touch') || lowerMessage.includes('phone') || lowerMessage.includes('call')) {
+      return "📬 **Contact Information**\n\nYou can reach Josh Creatives through:\n\n✉️ **Email:** josh@joshcreatives.com\n📅 **Schedule a Call:** Use the 'Commission Now' button below\n📍 **Location:** Pilaring, Pilar Surigao Del Norte\n🌍 **Available:** Worldwide remote\n\nI aim to respond to all inquiries within 24 hours. Looking forward to connecting with you!";
     }
 
     // Web Development
@@ -60,27 +112,17 @@ export default function Chatbot() {
 
     // Portfolio/Projects
     if (lowerMessage.includes('portfolio') || lowerMessage.includes('project') || lowerMessage.includes('work') || lowerMessage.includes('sample') || lowerMessage.includes('example') || lowerMessage.includes('past work')) {
-      return "📂 **Portfolio Highlights**\n\nJosh Creatives has worked on diverse projects including:\n• Corporate websites for local businesses\n• E-commerce stores with WooCommerce\n• Complete brand identity packages\n• Promotional videos and animations\n• Social media campaigns\n\nI'd be happy to discuss specific examples based on your needs! What type of project are you interested in?";
+      return "📂 **Portfolio Highlights**\n\nJosh Creatives has worked on diverse projects including:\n• ArkDesign.nl - WordPress development\n• CODECHUM - Front-end development\n• SIIT Branding - Complete brand identity\n• SUYO Youth Organization - Event materials\n• Pilar Esports - Esports branding\n\nI'd be happy to discuss specific examples based on your needs! What type of project are you interested in?";
     }
 
     // Pricing/Cost
     if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('rate') || lowerMessage.includes('how much') || lowerMessage.includes('pricing') || lowerMessage.includes('budget')) {
-      return "💰 **Pricing Information**\n\nProject costs vary based on scope and requirements:\n• Websites: Custom quote based on features\n• Logo design: Starts at ₱3,000\n• Branding packages: Custom quote\n• Video editing: Starts at ₱2,000 per video\n• Maintenance plans: Monthly retainers available\n\nFor an accurate quote, please schedule a call or send an email with your project details. Every project is unique!";
+      return "💰 **Pricing Information**\n\nProject costs vary based on scope and requirements:\n• Websites: Custom quote based on features\n• Logo design: Starts at ₱3,000\n• Branding packages: Custom quote\n• Video editing: Starts at ₱2,000 per video\n• Maintenance plans: Monthly retainers available\n\nFor an accurate quote, please click the 'Commission Now' button below or send an email with your project details. Every project is unique!";
     }
 
     // Availability/Freelance
-    if (lowerMessage.includes('available') || lowerMessage.includes('freelance') || lowerMessage.includes('hire') || lowerMessage.includes('book') || lowerMessage.includes('schedule')) {
-      return "✅ **Yes, Available for Freelance!**\n\nJosh Creatives is currently accepting new projects. You can:\n• Click the 'Schedule a Call' button above\n• Send an email via the 'Send Email' button\n• View the portfolio for work samples\n\nI typically respond within 24 hours. What type of project would you like to discuss?";
-    }
-
-    // Contact Information
-    if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach') || lowerMessage.includes('message') || lowerMessage.includes('get in touch')) {
-      return "📧 **Contact Information**\n\nYou can reach Josh Creatives through:\n• Email: josh@joshcreatives.com (or use the 'Send Email' button above)\n• Schedule a Call: Book a consultation using the button at the top\n• Social Media: Links available in the footer\n\nI aim to respond to all inquiries within 24 hours. Looking forward to connecting with you!";
-    }
-
-    // Experience/Background
-    if (lowerMessage.includes('experience') || lowerMessage.includes('background') || lowerMessage.includes('about') || lowerMessage.includes('who is') || lowerMessage.includes('tell me about')) {
-      return "👨‍💻 **About Josh Creatives**\n\nJosh Creatives combines expertise in:\n• Web Development (JavaScript, React, PHP)\n• WordPress (Themes, Plugins, WooCommerce)\n• Graphic Design (Branding, Logos, Marketing)\n• Motion Video Editing (Promos, Animation)\n\nWith a passion for creative technology, every project gets professional attention and tailored solutions. Based in Metro Manila, Philippines and serving clients worldwide. How can I help with your creative needs?";
+    if (lowerMessage.includes('available') || lowerMessage.includes('freelance') || lowerMessage.includes('book') || lowerMessage.includes('schedule')) {
+      return "✅ **Yes, Available for Freelance!**\n\nJosh Creatives is currently accepting new projects. You can:\n• Click the 'Commission Now' button below\n• Send an email: josh@joshcreatives.com\n• View the portfolio for work samples\n\nI typically respond within 24 hours. What type of project would you like to discuss?";
     }
 
     // Turnaround Time
@@ -90,12 +132,12 @@ export default function Chatbot() {
 
     // Services Overview
     if (lowerMessage.includes('service') || lowerMessage.includes('offer') || lowerMessage.includes('what do you do') || lowerMessage.includes('capabilities')) {
-      return "✨ **Services Overview**\n\nJosh Creatives offers four main services:\n\n🌐 **Web Development** – Custom websites, responsive design\n🔷 **WordPress** – Themes, plugins, WooCommerce\n🎨 **Graphic Design** – Logos, branding, marketing materials\n🎬 **Motion Video** – Editing, animation, motion graphics\n\nAll services can be combined for complete brand solutions. What interests you most?";
+      return "✨ **Services Overview**\n\nJosh Creatives offers four main services:\n\n🌐 **Web Development** – Custom websites, responsive design\n🔷 **WordPress** – Themes, plugins, WooCommerce\n🎨 **Graphic Design** – Logos, branding, marketing materials\n🎬 **Motion Video** – Editing, animation, motion graphics\n\nAll services can be combined for complete brand solutions. Ready to start a project? Click 'Commission Now' below!";
     }
 
     // Location
-    if (lowerMessage.includes('location') || lowerMessage.includes('where') || lowerMessage.includes('based') || lowerMessage.includes('office') || lowerMessage.includes('manila')) {
-      return "📍 **Location**\n\nJosh Creatives is based in Metro Manila, Philippines, but serves clients worldwide! We work remotely with clients from:\n• Philippines\n• United States\n• Australia\n• Singapore\n• And more!\n\nAll communication and project delivery is handled online, making it easy to collaborate regardless of location.";
+    if (lowerMessage.includes('location') || lowerMessage.includes('where') || lowerMessage.includes('based') || lowerMessage.includes('office') || lowerMessage.includes('surigao')) {
+      return "📍 **Location**\n\nJosh Creatives is based in Pilaring, Pilar Surigao Del Norte, Philippines, but serves clients worldwide! We work remotely with clients from:\n• Philippines\n• United States\n• Australia\n• Singapore\n• Europe\n• And more!\n\nAll communication and project delivery is handled online, making it easy to collaborate regardless of location.";
     }
 
     // Payment Methods
@@ -104,7 +146,7 @@ export default function Chatbot() {
     }
 
     // Default response for other queries
-    return "Thanks for your interest in Josh Creatives! 🤝\n\nI can help you with information about:\n• Web Development\n• WordPress Services\n• Graphic Design\n• Motion Video Editing\n• Pricing & Availability\n• Portfolio Examples\n\nWhat specific service or information are you looking for? Feel free to ask me anything!";
+    return "Thanks for your interest in Josh Creatives! 🤝\n\nI'm here to help with information about:\n• Web Development\n• WordPress Services\n• Graphic Design\n• Motion Video Editing\n• Pricing & Availability\n• Portfolio Examples\n\nWant to start a project? Click the 'Commission Now' button below! What creative service are you interested in?";
   };
 
   const handleSend = () => {
@@ -144,18 +186,24 @@ export default function Chatbot() {
   const suggestedQuestions = [
     "What services do you offer?",
     "How much for a logo design?",
-    "Are you available for freelance?",
-    "Show me your web development work",
-    "Do you edit videos?",
+    "I want to commission a project",
+    "Show me your portfolio",
+    "Contact information",
     "How long does a website take?",
   ];
+
+  // Function to handle commission button click
+  const handleCommissionClick = () => {
+    // You can customize this to open email, calendar, or both
+    window.location.href = 'mailto:josh@joshcreatives.com?subject=Project%20Inquiry%20-%20Commission%20Request';
+  };
 
   return (
     <>
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 md:right-6 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-900 transition-all hover:scale-110 z-50 group border border-gray-800"
+          className="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-900 transition-all hover:scale-110 z-50 group border border-gray-800"
           aria-label="Open chat"
         >
           <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform" />
@@ -163,7 +211,7 @@ export default function Chatbot() {
       )}
 
       {isOpen && (
-        <div className="fixed inset-x-4 bottom-4 md:inset-auto md:bottom-6 md:right-6 md:w-96 md:h-[600px] bg-black rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-800 overflow-hidden">
+        <div className="fixed inset-x-4 bottom-4 md:inset-auto md:bottom-6 md:right-6 md:w-96 bg-black rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-800 overflow-hidden max-h-[85vh] md:max-h-[600px]">
           {/* Header */}
           <div className="bg-gradient-to-r from-gray-900 to-black text-white p-4 border-b border-gray-800">
             <div className="flex items-center justify-between">
@@ -175,13 +223,13 @@ export default function Chatbot() {
                   <h3 className="font-semibold text-white">Josh Creatives AI</h3>
                   <p className="text-xs text-gray-400 flex items-center gap-1">
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    Online • Ready to help
+                    Online • Here to help!
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="hover:bg-gray-800 p-1 rounded transition-colors text-gray-400 hover:text-white"
+                className="hover:bg-gray-800 p-2 rounded-full transition-colors text-gray-400 hover:text-white z-20"
                 aria-label="Close chat"
               >
                 <X className="w-5 h-5" />
@@ -280,6 +328,18 @@ export default function Chatbot() {
             </div>
           )}
 
+          {/* Commission Button */}
+          <div className="px-4 pt-2 bg-black">
+            <button
+              onClick={handleCommissionClick}
+              className="w-full bg-gradient-to-r from-gray-800 to-gray-900 text-white py-3 rounded-lg text-sm font-medium hover:from-gray-700 hover:to-gray-800 transition-all flex items-center justify-center gap-2 border border-gray-700 shadow-lg"
+            >
+              <Calendar className="w-4 h-4" />
+              Commission Now - Let's Work Together!
+              <ExternalLink className="w-3 h-3" />
+            </button>
+          </div>
+
           {/* Input Area */}
           <div className="p-4 border-t border-gray-800 bg-black">
             <div className="flex gap-2">
@@ -301,7 +361,7 @@ export default function Chatbot() {
               </button>
             </div>
             <p className="text-xs text-gray-600 text-center mt-2">
-              💬 Ask me anything about Josh Creatives' services
+              💬 Ask me anything about Josh Creatives!
             </p>
           </div>
         </div>
