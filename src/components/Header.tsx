@@ -1,18 +1,19 @@
 import { MapPin, Calendar, Mail, BookOpen, Code, Palette, Video, Globe, ChevronRight, X } from 'lucide-react';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { PopupModal } from 'react-calendly';
 
 export default function Header() {
-  const [showCalendar, setShowCalendar] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   const [emailStatus, setEmailStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
     type: null,
     message: ''
   });
 
-  // Create a ref for the form
+  // Form ref
   const formRef = useRef<HTMLFormElement>(null);
 
   // Your EmailJS credentials
@@ -92,21 +93,17 @@ export default function Header() {
 
       console.log('Email sent successfully:', result);
       
-      // Set success message
       setEmailStatus({
         type: 'success',
         message: 'Message sent successfully! I\'ll get back to you soon.'
       });
       
-      // Reset form using the ref
       if (formRef.current) {
         formRef.current.reset();
       }
       
-      // Close modal after 2 seconds
       setTimeout(() => {
         setShowEmail(false);
-        // Clear status after modal closes
         setTimeout(() => {
           setEmailStatus({ type: null, message: '' });
         }, 300);
@@ -120,7 +117,6 @@ export default function Header() {
         message: 'Failed to send message. Please try again or email directly.'
       });
       
-      // Clear error message after 3 seconds
       setTimeout(() => {
         setEmailStatus({ type: null, message: '' });
       }, 3000);
@@ -200,8 +196,9 @@ export default function Header() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-2">
+              {/* Updated Schedule Call button with Calendly */}
               <button 
-                onClick={() => setShowCalendar(true)}
+                onClick={() => setIsCalendlyOpen(true)}
                 className="bg-gray-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-800 transition-colors text-sm"
               >
                 <Calendar className="w-4 h-4" />
@@ -227,95 +224,22 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Calendar Modal */}
-      {showCalendar && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
-            {/* Close button */}
-            <button 
-              onClick={() => setShowCalendar(false)}
-              className="absolute right-4 top-4 text-gray-400 hover:text-gray-900 transition-colors z-10"
-            >
-              <X className="w-5 h-5" />
-            </button>
+      {/* Calendly Popup Modal - This replaces your old calendar modal */}
+      <PopupModal
+        url="https://calendly.com/joshcreatives081200/30min"
+        onModalClose={() => setIsCalendlyOpen(false)}
+        open={isCalendlyOpen}
+        rootElement={document.getElementById('root') as HTMLElement}
+        /*
+          Optional: Pre-fill user data if you have it
+          prefill={{
+            email: '',
+            name: '',
+          }}
+        */
+      />
 
-            {/* Calendar Header */}
-            <div className="mb-6">
-              <h3 className="text-xl font-bold text-gray-900">Schedule a Call</h3>
-              <p className="text-sm text-gray-500 mt-1">Choose a date and time that works for you</p>
-            </div>
-
-            {/* Simple Calendar UI */}
-            <div className="space-y-4">
-              {/* Month Navigation */}
-              <div className="flex items-center justify-between">
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  ←
-                </button>
-                <span className="font-medium text-gray-900">March 2026</span>
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  →
-                </button>
-              </div>
-
-              {/* Week Days */}
-              <div className="grid grid-cols-7 gap-1 text-center text-xs font-medium text-gray-500">
-                <div>Su</div>
-                <div>Mo</div>
-                <div>Tu</div>
-                <div>We</div>
-                <div>Th</div>
-                <div>Fr</div>
-                <div>Sa</div>
-              </div>
-
-              {/* Calendar Days */}
-              <div className="grid grid-cols-7 gap-1">
-                {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-                  <button
-                    key={day}
-                    className="aspect-square flex items-center justify-center text-sm hover:bg-gray-900 hover:text-white rounded-lg transition-colors"
-                  >
-                    {day}
-                  </button>
-                ))}
-              </div>
-
-              {/* Time Slots */}
-              <div className="mt-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Available Times</h4>
-                <div className="grid grid-cols-3 gap-2">
-                  {['9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM'].map((time) => (
-                    <button
-                      key={time}
-                      className="text-xs bg-gray-50 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-lg transition-colors border border-gray-200"
-                    >
-                      {time}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Confirm Button */}
-              <button 
-                onClick={() => {
-                  alert('Meeting scheduled! (Demo - In production, this would connect to your calendar)');
-                  setShowCalendar(false);
-                }}
-                className="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors mt-4"
-              >
-                Confirm Schedule
-              </button>
-
-              <p className="text-xs text-gray-400 text-center">
-                This is a demo calendar. In production, it would connect to Calendly or Google Calendar.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Email Modal - FIXED VERSION */}
+      {/* Email Modal */}
       {showEmail && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
