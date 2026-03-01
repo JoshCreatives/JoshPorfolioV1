@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles, Code, Palette, Video, Globe, Calendar, ExternalLink } from 'lucide-react';
+import botLogo from '../assets/bot-logo.png';
 
 interface Message {
   id: string;
@@ -216,8 +217,8 @@ export default function Chatbot() {
           <div className="bg-gradient-to-r from-gray-900 to-black text-white p-4 border-b border-gray-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-gray-300" />
+                <div className="w-10 h-10 bg-gray-800 rounded-full overflow-hidden flex items-center justify-center">
+                  <img src={botLogo} alt="Logo" className="object-cover w-full h-full" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Josh Creatives AI</h3>
@@ -261,8 +262,12 @@ export default function Chatbot() {
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {message.sender === 'bot' && (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center text-white text-xs font-bold mr-2 flex-shrink-0 shadow-md border border-gray-700">
-                    JC
+                  <div className="w-8 h-8 rounded-full overflow-hidden mr-2 flex-shrink-0 shadow-md border border-gray-700">
+                    <img
+                      src={botLogo}
+                      alt="Josh Creatives logo"
+                      className="object-cover w-full h-full"
+                    />
                   </div>
                 )}
                 <div
@@ -289,8 +294,12 @@ export default function Chatbot() {
             
             {isTyping && (
               <div className="flex justify-start">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center text-white text-xs font-bold mr-2 shadow-md border border-gray-700">
-                  JC
+                <div className="w-8 h-8 rounded-full overflow-hidden mr-2 shadow-md border border-gray-700">
+                  <img
+                    src="/Josh Creatives logo1.png"
+                    alt="Josh Creatives logo"
+                    className="object-cover w-full h-full"
+                  />
                 </div>
                 <div className="bg-gray-900 text-gray-200 rounded-2xl rounded-bl-none p-4 shadow-sm border border-gray-800">
                   <div className="flex gap-1">
