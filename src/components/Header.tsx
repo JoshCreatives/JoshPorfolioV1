@@ -279,7 +279,7 @@ export default function Header() {
                 <input
                   type="text"
                   name="from_name"
-                  placeholder="John Doe"
+                  placeholder="Your name"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   required
                   disabled={isSending}
@@ -292,7 +292,7 @@ export default function Header() {
                 <input
                   type="email"
                   name="from_email"
-                  placeholder="john@example.com"
+                  placeholder="Your email"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   required
                   disabled={isSending}
