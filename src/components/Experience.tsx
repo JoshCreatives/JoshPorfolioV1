@@ -1,11 +1,32 @@
-import { Briefcase, GraduationCap, Heart, Code, Palette, Globe, Video, Sparkles, X, Calendar, MapPin, ExternalLink } from 'lucide-react';
+import { Briefcase, GraduationCap, Heart, Code, Palette, Globe, Sparkles, X, Calendar, MapPin, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Experience() {
-  const [selectedExperience, setSelectedExperience] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+// Types for experience data
+interface ExperienceItem {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  year: string;
+  description?: string;
+  fullDescription: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  color: string;
+  images?: string[];
+  achievements?: string[];
+  technologies?: string[];
+}
 
-  const experiences = [
+interface ExperienceCategory {
+  category: string;
+  items: ExperienceItem[];
+}
+
+export default function Experience() {
+  const [selectedExperience, setSelectedExperience] = useState<ExperienceItem | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const experiences: ExperienceCategory[] = [
     {
       category: 'work',
       items: [
@@ -188,7 +209,7 @@ export default function Experience() {
     { id: 'milestone', name: 'Milestone', icon: Heart },
   ];
 
-  const openModal = (experience) => {
+  const openModal = (experience: ExperienceItem) => {
     setSelectedExperience(experience);
     setShowModal(true);
     // Prevent scrolling on body when modal is open
@@ -215,7 +236,7 @@ export default function Experience() {
         {/* Experience Timeline */}
         <div className="space-y-10">
           {categories.map((category) => {
-            const categoryData = experiences.find(cat => cat.category === category.id);
+            const categoryData = experiences.find((cat: ExperienceCategory) => cat.category === category.id);
             if (!categoryData) return null;
             
             const Icon = category.icon;
@@ -351,7 +372,7 @@ export default function Experience() {
             {selectedExperience.images && selectedExperience.images.length > 0 && (
               <div className="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
                 <div className="flex h-full">
-                  {selectedExperience.images.slice(0, 3).map((img, idx) => (
+                  {selectedExperience.images.slice(0, 3).map((img: string, idx: number) => (
                     <div 
                       key={idx} 
                       className="flex-1 bg-cover bg-center relative"
@@ -402,7 +423,7 @@ export default function Experience() {
                 <div className="mb-6">
                   <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Achievements</h4>
                   <ul className="space-y-1">
-                    {selectedExperience.achievements.map((achievement, idx) => (
+                    {selectedExperience.achievements.map((achievement: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
                         <span className="text-gray-900 mt-1">•</span>
                         <span>{achievement}</span>
@@ -417,7 +438,7 @@ export default function Experience() {
                 <div className="mb-4">
                   <h4 className="text-sm font-semibold text-gray-900 mb-2">Technologies Used</h4>
                   <div className="flex flex-wrap gap-2">
-                    {selectedExperience.technologies.map((tech, idx) => (
+                    {selectedExperience.technologies.map((tech: string, idx: number) => (
                       <span
                         key={idx}
                         className="text-xs bg-gray-900 text-white px-3 py-1.5 rounded-full"
