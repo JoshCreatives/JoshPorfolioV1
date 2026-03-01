@@ -1,10 +1,27 @@
 import { MapPin, Calendar, Mail, BookOpen, Code, Palette, Video, Globe, ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 export default function Header() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: ''
+  });
+
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Your EmailJS credentials
+  const PUBLIC_KEY = 'wWJGX8p_3_nSFbKWf';
+  const SERVICE_ID = 'service_iajb2y7';
+  const TEMPLATE_ID = 'template_n3xn2z6';
+
+  // Initialize EmailJS
+  emailjs.init(PUBLIC_KEY);
 
   // Portfolio projects data
   const portfolioProjects = [
@@ -12,7 +29,7 @@ export default function Header() {
       title: 'ArkDesign.nl',
       category: 'WordPress Development',
       description: 'Custom WordPress website for Dutch design agency',
-      image: '/portfolio/arkdesign.jpg', // Add your image paths
+      image: '/portfolio/arkdesign.jpg',
       tags: ['WordPress', 'PHP', 'Custom Theme'],
     },
     {
@@ -51,6 +68,66 @@ export default function Header() {
       tags: ['React', 'Tailwind', 'Design'],
     },
   ];
+
+  // Handle email form submission
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSending(true);
+    setEmailStatus({ type: null, message: '' });
+
+    const formData = new FormData(e.currentTarget);
+    const formFields = {
+      from_name: formData.get('from_name'),
+      from_email: formData.get('from_email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+
+    try {
+      const result = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        formFields
+      );
+
+      console.log('Email sent successfully:', result);
+      
+      // Set success message
+      setEmailStatus({
+        type: 'success',
+        message: 'Message sent successfully! I\'ll get back to you soon.'
+      });
+      
+      // Reset form using the ref
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      
+      // Close modal after 2 seconds
+      setTimeout(() => {
+        setShowEmail(false);
+        // Clear status after modal closes
+        setTimeout(() => {
+          setEmailStatus({ type: null, message: '' });
+        }, 300);
+      }, 2000);
+      
+    } catch (error: any) {
+      console.error('EmailJS Error:', error);
+      
+      setEmailStatus({
+        type: 'error',
+        message: 'Failed to send message. Please try again or email directly.'
+      });
+      
+      // Clear error message after 3 seconds
+      setTimeout(() => {
+        setEmailStatus({ type: null, message: '' });
+      }, 3000);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <header className="bg-white py-4">
@@ -238,13 +315,16 @@ export default function Header() {
         </div>
       )}
 
-      {/* Email Modal */}
+      {/* Email Modal - FIXED VERSION */}
       {showEmail && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
             {/* Close button */}
             <button 
-              onClick={() => setShowEmail(false)}
+              onClick={() => {
+                setShowEmail(false);
+                setEmailStatus({ type: null, message: '' });
+              }}
               className="absolute right-4 top-4 text-gray-400 hover:text-gray-900 transition-colors z-10"
             >
               <X className="w-5 h-5" />
@@ -256,20 +336,29 @@ export default function Header() {
               <p className="text-sm text-gray-500 mt-1">I'll get back to you within 24 hours</p>
             </div>
 
+            {/* Status Message */}
+            {emailStatus.type && (
+              <div className={`mb-4 p-3 rounded-lg text-sm ${
+                emailStatus.type === 'success' 
+                  ? 'bg-green-50 text-green-800 border border-green-200' 
+                  : 'bg-red-50 text-red-800 border border-red-200'
+              }`}>
+                {emailStatus.message}
+              </div>
+            )}
+
             {/* Email Form */}
-            <form className="space-y-4" onSubmit={(e) => {
-              e.preventDefault();
-              alert('Email sent! (Demo - In production, this would send a real email)');
-              setShowEmail(false);
-            }}>
+            <form ref={formRef} className="space-y-4" onSubmit={handleEmailSubmit}>
               {/* Name Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
                 <input
                   type="text"
+                  name="from_name"
                   placeholder="John Doe"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   required
+                  disabled={isSending}
                 />
               </div>
 
@@ -278,9 +367,11 @@ export default function Header() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
                 <input
                   type="email"
+                  name="from_email"
                   placeholder="john@example.com"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   required
+                  disabled={isSending}
                 />
               </div>
 
@@ -289,9 +380,11 @@ export default function Header() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
                 <input
                   type="text"
+                  name="subject"
                   placeholder="Project Inquiry"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   required
+                  disabled={isSending}
                 />
               </div>
 
@@ -299,32 +392,41 @@ export default function Header() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                 <textarea
+                  name="message"
                   rows={4}
                   placeholder="Tell me about your project..."
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
                   required
+                  disabled={isSending}
                 />
               </div>
 
               {/* Send Button */}
               <button
                 type="submit"
-                className="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors mt-2"
+                disabled={isSending}
+                className={`w-full py-3 rounded-lg font-medium transition-colors mt-2 ${
+                  isSending
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-gray-900 text-white hover:bg-gray-800'
+                }`}
               >
-                Send Message
+                {isSending ? 'Sending...' : 'Send Message'}
               </button>
             </form>
 
             {/* Alternative Contact */}
             <div className="mt-6 pt-4 border-t border-gray-200">
               <p className="text-xs text-gray-500 text-center">
-                Or email directly at: <a href="mailto:josh@joshcreatives.com" className="text-gray-900 font-medium hover:underline">josh@joshcreatives.com</a>
+                Or email directly at:{' '}
+                <a 
+                  href="mailto:joshcreatives081200@gmail.com" 
+                  className="text-gray-900 font-medium hover:underline"
+                >
+                  joshcreatives081200@gmail.com
+                </a>
               </p>
             </div>
-
-            <p className="text-xs text-gray-400 text-center mt-4">
-              This is a demo form. In production, it would connect to an email service.
-            </p>
           </div>
         </div>
       )}
