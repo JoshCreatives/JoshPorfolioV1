@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Heart, Code, Palette, Globe, Sparkles, X, Calendar, MapPin, ExternalLink } from 'lucide-react';
+import { Briefcase, GraduationCap, Heart, Code, Palette, Globe, Sparkles, X, Calendar, MapPin, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 
 // Types for experience data
@@ -22,9 +22,22 @@ interface ExperienceCategory {
   items: ExperienceItem[];
 }
 
-export default function Experience() {
+type Props = {
+  expanded?: boolean;
+  onToggle?: () => void;
+  hideHeader?: boolean;
+};
+
+export default function Experience(props: Props) {
+  const { expanded: expandedProp, onToggle, hideHeader } = props || {};
   const [selectedExperience, setSelectedExperience] = useState<ExperienceItem | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [expandedLocal, setExpandedLocal] = useState<boolean>(false);
+  const expanded = expandedProp ?? expandedLocal;
+  const toggle = () => {
+    if (onToggle) return onToggle();
+    setExpandedLocal((s) => !s);
+  };
 
   const experiences: ExperienceCategory[] = [
     {
@@ -224,17 +237,29 @@ export default function Experience() {
   };
 
   return (
-    <section className="bg-white py-16 border-t border-gray-100">
+    <section className="bg-white py-16">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
+        {!hideHeader && (
         <div className="flex items-center gap-3 mb-10">
           <div className="w-8 h-[2px] bg-black"></div>
           <h2 className="text-2xl font-light tracking-wide text-gray-900">EXPERIENCE</h2>
           <div className="flex-1 h-[2px] bg-gray-100"></div>
+          <button
+            aria-expanded={expanded}
+            onClick={toggle}
+            className="ml-3 p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-2"
+          >
+            {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <span className="text-xs">{expanded ? 'Hide' : 'Show'}</span>
+          </button>
         </div>
+        )}
 
         {/* Experience Timeline */}
-        <div className="space-y-10">
+        {expanded && (
+          <>
+          <div className="space-y-10">
           {categories.map((category) => {
             const categoryData = experiences.find((cat: ExperienceCategory) => cat.category === category.id);
             if (!categoryData) return null;
@@ -344,6 +369,8 @@ export default function Experience() {
             ✦ Currently available for freelance work • 5+ years of combined experience ✦
           </p>
         </div>
+        </>
+        )}
       </div>
 
       {/* Experience Modal */}

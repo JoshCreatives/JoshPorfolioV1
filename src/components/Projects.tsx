@@ -1,6 +1,20 @@
-import { ExternalLink, Github, Globe, Sparkles, Palette, Code, Video } from 'lucide-react';
+import { ExternalLink, Github, Globe, Sparkles, Palette, Code, Video, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 
-export default function Projects() {
+type Props = {
+  expanded?: boolean;
+  onToggle?: () => void;
+  hideHeader?: boolean;
+};
+
+export default function Projects(props: Props) {
+  const { expanded: expandedProp, onToggle, hideHeader } = props || {};
+  const [expandedLocal, setExpandedLocal] = useState<boolean>(false);
+  const expanded = expandedProp ?? expandedLocal;
+  const toggle = () => {
+    if (onToggle) return onToggle();
+    setExpandedLocal((s) => !s);
+  };
   const projects = [
     // Web Development Projects
     {
@@ -72,29 +86,32 @@ export default function Projects() {
   ];
 
   return (
-    <section className="bg-white py-16 border-t border-gray-100">
+    <section className="bg-white py-16">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
+        {!hideHeader && (
         <div className="flex items-center gap-3 mb-10">
           <div className="w-8 h-[2px] bg-black"></div>
           <h2 className="text-2xl font-light tracking-wide text-gray-900">PROJECTS</h2>
           <div className="flex-1 h-[2px] bg-gray-100"></div>
+          <button
+            aria-expanded={expanded}
+            onClick={toggle}
+            className="ml-3 p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-2"
+          >
+            {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <span className="text-xs">{expanded ? 'Hide' : 'Show'}</span>
+          </button>
         </div>
+        )}
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className="text-xs px-3 py-1.5 rounded-full border border-gray-200 hover:border-gray-900 hover:bg-gray-900 hover:text-white transition-all"
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
+            {/* Category filters removed per request */}
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-5">
+            {expanded && (
+              <>
+              {/* Projects Grid */}
+              <div className="grid md:grid-cols-2 gap-5">
+          
           {projects.map((project, index) => {
             const Icon = project.icon;
             return (
@@ -176,6 +193,8 @@ export default function Projects() {
             );
           })}
         </div>
+          </>
+        )}
       </div>
     </section>
   );

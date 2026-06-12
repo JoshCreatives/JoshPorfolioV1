@@ -1,8 +1,6 @@
 import { ChevronRight, ChevronLeft } from 'lucide-react';
-import { useState } from 'react';
 
 export default function Gallery() {
-  const [scrollPosition, setScrollPosition] = useState(0);
 
   const images = [
     'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop',
