@@ -137,7 +137,7 @@ function App() {
       {/* Footer: compact note only (full contact lives inside CONTACT) */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 mt-2">
         <div className="pt-2 border-t border-gray-100 flex items-center justify-center gap-2">
-          <p className="text-xs text-gray-400">© 2025 Josh Creatives. All rights reserved.</p>
+          <p className="text-xs text-gray-400" style={{ marginBottom: '30px' }}>© 2025 Josh Creatives. All rights reserved.</p>
         </div>
       </div>
       {/* <Gallery /> */}
