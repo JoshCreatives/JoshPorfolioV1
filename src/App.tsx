@@ -70,9 +70,9 @@ function App() {
 
       {/* Top-row compact controls for the three sections (30px gap, titles close together) */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-2 pb-2">
-        <div className="flex justify-center items-center gap-8">
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-light tracking-tight text-gray-900">ABOUT</h2>
+        <div className="flex flex-row flex-wrap justify-center items-center gap-3 md:gap-8">
+          <div className="flex items-center gap-2 px-2">
+            <h2 className="text-xs sm:text-sm md:text-lg font-light tracking-tight text-gray-900">ABOUT</h2>
             <button
               onClick={toggleAbout}
               className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
@@ -83,8 +83,8 @@ function App() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-light tracking-tight text-gray-900">EXPERIENCE</h2>
+          <div className="flex items-center gap-2 px-2">
+            <h2 className="text-xs sm:text-sm md:text-lg font-light tracking-tight text-gray-900">EXPERIENCE</h2>
             <button
               onClick={toggleExp}
               className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
@@ -95,8 +95,8 @@ function App() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-light tracking-tight text-gray-900">PROJECTS</h2>
+          <div className="flex items-center gap-2 px-2">
+            <h2 className="text-xs sm:text-sm md:text-lg font-light tracking-tight text-gray-900">PROJECTS</h2>
             <button
               onClick={toggleProj}
               className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
@@ -107,8 +107,8 @@ function App() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-light tracking-tight text-gray-900">CONTACT</h2>
+          <div className="flex items-center gap-2 px-2">
+            <h2 className="text-xs sm:text-sm md:text-lg font-light tracking-tight text-gray-900">CONTACT</h2>
             <button
               onClick={toggleConnect}
               className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
