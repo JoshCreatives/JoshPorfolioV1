@@ -20,7 +20,7 @@ export default function Gallery() {
 
   return (
     <section className="bg-white py-12">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Gallery</h2>
 
         <div className="relative">
@@ -41,7 +41,7 @@ export default function Gallery() {
                 key={index}
                 src={img}
                 alt={`Gallery ${index + 1}`}
-                className="w-80 h-60 object-cover rounded-lg flex-shrink-0"
+                className="w-72 sm:w-80 h-60 object-cover rounded-lg flex-shrink-0"
               />
             ))}
           </div>

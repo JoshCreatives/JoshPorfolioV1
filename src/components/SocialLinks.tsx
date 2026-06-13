@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { Linkedin, Github, Instagram, Mail, Calendar, MessageCircle, Globe, MapPin, Heart, ChevronDown, ChevronUp } from 'lucide-react';
+import { Linkedin, Github, Instagram, Mail, Calendar, MessageCircle, Globe, MapPin, Heart } from 'lucide-react';
 
 export default function SocialLinks() {
-  const [contactOpen, setContactOpen] = useState(false);
   return (
     <section className="bg-white py-10 border-t border-gray-100 mb-[50px]">
       <div className="max-w-5xl mx-auto px-6">
@@ -59,27 +57,14 @@ export default function SocialLinks() {
             </div>
           </div>
 
-          {/* Column 2: Contact (collapsible on small screens) */}
+          {/* Column 2: Contact */}
           <div>
-            <div className="flex items-center justify-between mb-3 md:block">
-              <button
-                className="w-full flex items-center justify-between md:justify-start gap-2 font-medium text-gray-900 text-sm"
-                onClick={() => setContactOpen((s) => !s)}
-                aria-expanded={contactOpen}
-                aria-controls="footer-contact"
-              >
-                <span className="flex items-center gap-2">
-                  <span className="w-1 h-4 bg-black rounded-full"></span>
-                  Contact
-                </span>
-                <span className="md:hidden text-gray-500">
-                  {contactOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                </span>
-              </button>
+            <h3 className="font-medium text-gray-900 text-sm mb-3 flex items-center gap-2">
+              <span className="w-1 h-4 bg-black rounded-full"></span>
+              Contact
+            </h3>
 
-            </div>
-
-            <div id="footer-contact" className={`${contactOpen ? 'block' : 'hidden'} md:block space-y-2.5`}>
+            <div id="footer-contact" className="space-y-2.5">
               <a
                 href="mailto:josh@joshcreatives.com"
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"

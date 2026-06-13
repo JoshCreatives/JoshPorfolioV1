@@ -66,11 +66,16 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header
+        onToggleAbout={toggleAbout}
+        onToggleExp={toggleExp}
+        onToggleProj={toggleProj}
+        onToggleConnect={toggleConnect}
+      />
 
       {/* Top-row compact controls for the three sections (30px gap, titles close together) */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-2 pb-2">
-        <div className="flex flex-row flex-wrap justify-center items-center gap-3 md:gap-8">
+        <div className="hidden md:flex flex-row flex-wrap justify-center items-center gap-3 md:gap-8">
           <div className="flex items-center gap-2 px-2">
             <h2 className="text-xs sm:text-sm md:text-lg font-light tracking-tight text-gray-900">ABOUT</h2>
             <button
@@ -139,9 +144,7 @@ function App() {
       {/* <Footer /> */}
       <Chatbot />
 
-      <div className="fixed bottom-0 left-0 right-0 h-24 pointer-events-none z-10">
-  <div className="absolute inset-0 backdrop-blur-sm [mask-image:linear-gradient(transparent,black)]"></div>
-</div>
+      
     </div>
   );
 }

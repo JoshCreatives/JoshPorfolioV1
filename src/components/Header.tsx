@@ -1,9 +1,16 @@
-import { MapPin, Calendar, Mail, X } from 'lucide-react';
+import { MapPin, Calendar, Mail, X, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { PopupModal } from 'react-calendly';
 
-export default function Header() {
+type HeaderProps = {
+  onToggleAbout?: () => void;
+  onToggleExp?: () => void;
+  onToggleProj?: () => void;
+  onToggleConnect?: () => void;
+};
+
+export default function Header({ onToggleAbout, onToggleExp, onToggleProj, onToggleConnect }: HeaderProps) {
   const [showEmail, setShowEmail] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -12,6 +19,7 @@ export default function Header() {
     type: null,
     message: ''
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Form ref
   const formRef = useRef<HTMLFormElement>(null);
@@ -131,7 +139,7 @@ export default function Header() {
     <header className="bg-white py-4">
       <div className="max-w-5xl mx-auto px-6 lg:px-8 pb-2 pt-4">
         {/* Top Row - Logo and Name on Same Line */}
-        <div className="flex items-center justify-center mb-4">
+        <div className="flex items-center justify-start md:justify-center mb-4">
           <div className="flex items-center gap-4">
             {/* Logo */}
             <div className="w-14 h-14 md:w-16 md:h-16 bg-black rounded-xl flex items-center justify-center shadow-sm">
@@ -162,8 +170,60 @@ export default function Header() {
           {/* badge removed */}
         </div>
 
+        {/* Mobile burger (small screens) */}
+        <div className="absolute right-6 top-6 md:hidden">
+          <button
+            onClick={() => setMobileMenuOpen((s) => !s)}
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            className="p-3 rounded-md bg-white shadow-sm"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Sliding full-width mobile menu (left -> center) */}
+        <div className="md:hidden">
+          <div className={`fixed inset-0 z-40 transition-opacity ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+            <div
+              className={`fixed inset-0 bg-black/40 z-40 ${mobileMenuOpen ? 'block' : 'hidden'}`}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+          </div>
+
+          <aside className={`fixed inset-y-0 left-0 z-50 w-full bg-white transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 md:hidden`}>
+            <div className="absolute top-4 left-4">
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Back"
+                className="p-2 rounded-md bg-gray-100 hover:bg-gray-200"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="h-full flex flex-col items-center justify-center gap-6 p-6">
+              <button onClick={() => { onToggleAbout?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+                <span>ABOUT</span>
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
+              <button onClick={() => { onToggleExp?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+                <span>EXPERIENCE</span>
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
+              <button onClick={() => { onToggleProj?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+                <span>PROJECTS</span>
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
+              <button onClick={() => { onToggleConnect?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+                <span>CONTACT</span>
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+          </aside>
+        </div>
+
         {/* Main Content Row */}
-        <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-center">
+        <div className="flex flex-col md:flex-row gap-4 items-start md:items-center md:justify-center">
           {/* Left Side - Description and Skills */}
           <div className="flex-1 text-center">
             {/* Description removed per preference */}
@@ -171,7 +231,7 @@ export default function Header() {
             {/* Skills tags removed */}
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className="flex flex-wrap gap-3 justify-start md:justify-center">
               <button
                 onClick={() => setIsCalendlyOpen(true)}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-black text-white shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300"
