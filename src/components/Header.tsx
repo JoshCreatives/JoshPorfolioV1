@@ -174,7 +174,7 @@ export default function Header() {
             <div className="flex flex-wrap gap-3 justify-center">
               <button
                 onClick={() => setIsCalendlyOpen(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-black text-white shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 aria-label="Schedule a call"
               >
                 <Calendar className="w-4 h-4" />
@@ -200,7 +200,7 @@ export default function Header() {
         url="https://calendly.com/joshcreatives081200/30min"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
-        rootElement={document.getElementById('root') ?? undefined}
+        rootElement={document.getElementById('root') as HTMLElement}
         /*
           Optional: Pre-fill user data if you have it
           prefill={{
