@@ -14,9 +14,10 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 function App() {
-  const [aboutExpanded, setAboutExpanded] = useState(false);
+  const [aboutExpanded, setAboutExpanded] = useState(true);
   const [expExpanded, setExpExpanded] = useState(false);
   const [projExpanded, setProjExpanded] = useState(false);
+  const [connectExpanded, setConnectExpanded] = useState(false);
 
   const toggleAbout = () => {
     setAboutExpanded((prev) => {
@@ -51,14 +52,25 @@ function App() {
     });
   };
 
+  const toggleConnect = () => {
+    setConnectExpanded((prev) => {
+      const next = !prev;
+      if (next) {
+        setAboutExpanded(false);
+        setExpExpanded(false);
+        setProjExpanded(false);
+      }
+      return next;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white">
-    <div className="px-4 md:px-[100px]"></div>
       <Header />
 
       {/* Top-row compact controls for the three sections (30px gap, titles close together) */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-6">
-        <div className="flex justify-center items-center gap-[30px]">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-2 pb-2">
+        <div className="flex justify-center items-center gap-8">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-light tracking-tight text-gray-900">ABOUT</h2>
             <button
@@ -94,17 +106,35 @@ function App() {
               {projExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
           </div>
+
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-light tracking-tight text-gray-900">CONTACT</h2>
+            <button
+              onClick={toggleConnect}
+              className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
+              aria-expanded={connectExpanded}
+              aria-label={connectExpanded ? 'Hide Contact' : 'Show Contact'}
+            >
+              {connectExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Shared content area: only one section renders here so content appears at the same position */}
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
         {aboutExpanded && <About expanded hideHeader />}
         {expExpanded && <Experience expanded hideHeader />}
         {projExpanded && <Projects expanded hideHeader />}
+        {connectExpanded && <SocialLinks />}
       </div>
       {/* <Certifications /> */}
-      <SocialLinks />
+      {/* Footer: compact note only (full contact lives inside CONTACT) */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 mt-2">
+        <div className="pt-2 border-t border-gray-100 flex items-center justify-center gap-2">
+          <p className="text-xs text-gray-400">© 2025 Josh Creatives. All rights reserved.</p>
+        </div>
+      </div>
       {/* <Gallery /> */}
       {/* <Footer /> */}
       <Chatbot />

@@ -1,5 +1,5 @@
 import { MapPin, Calendar, Mail, X } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { PopupModal } from 'react-calendly';
 
@@ -21,8 +21,10 @@ export default function Header() {
   const SERVICE_ID = 'service_iajb2y7';
   const TEMPLATE_ID = 'template_n3xn2z6';
 
-  // Initialize EmailJS
-  emailjs.init(PUBLIC_KEY);
+  // Initialize EmailJS once on mount
+  useEffect(() => {
+    emailjs.init(PUBLIC_KEY);
+  }, []);
 
   // Portfolio projects data
   const portfolioProjects = [
@@ -127,10 +129,10 @@ export default function Header() {
 
   return (
     <header className="bg-white py-4">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 py-6">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pb-2 pt-4">
         {/* Top Row - Logo and Name on Same Line */}
         <div className="flex items-center justify-center mb-4">
-          <div className="flex items-center gap-4 justify-center">
+          <div className="flex items-center gap-4">
             {/* Logo */}
             <div className="w-14 h-14 md:w-16 md:h-16 bg-black rounded-xl flex items-center justify-center shadow-sm">
               <img
@@ -141,8 +143,8 @@ export default function Header() {
             </div>
             
             {/* Name and Verification */}
-            <div className="text-center">
-              <div className="flex items-center gap-2 justify-center">
+            <div>
+              <div className="flex items-center gap-2">
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Josh Creatives</h1>
                 <div className="w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs">✓</span>
@@ -150,7 +152,7 @@ export default function Header() {
               </div>
               
               {/* Location */}
-              <div className="flex items-center gap-1 text-gray-500 mt-0.5 justify-center">
+              <div className="flex items-center gap-1 text-gray-500 mt-0.5">
                 <MapPin className="w-3.5 h-3.5" />
                 <span className="text-xs">Pilaring, Pilar Surigao Del Norte</span>
               </div>
@@ -161,32 +163,28 @@ export default function Header() {
         </div>
 
         {/* Main Content Row */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-center">
           {/* Left Side - Description and Skills */}
-          <div className="w-full max-w-2xl text-center">
-            {/* Description */}
-            <p className="text-gray-600 text-sm md:text-base mb-3 max-w-2xl mx-auto">
-              Creative technologist bringing ideas to life through 
-              <span className="text-gray-900 font-medium"> web development</span>, 
-              <span className="text-gray-900 font-medium"> design</span>, and 
-              <span className="text-gray-900 font-medium"> video</span>.
-            </p>
+          <div className="flex-1 text-center">
+            {/* Description removed per preference */}
 
             {/* Skills tags removed */}
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              {/* Updated Schedule Call button with Calendly */}
-              <button 
+            <div className="flex flex-wrap gap-3 justify-center">
+              <button
                 onClick={() => setIsCalendlyOpen(true)}
-                className="bg-gray-900 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-800 transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                aria-label="Schedule a call"
               >
                 <Calendar className="w-4 h-4" />
                 Schedule Call
               </button>
-              <button 
+
+              <button
                 onClick={() => setShowEmail(true)}
-                className="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition-colors text-sm hover:border-gray-300"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                aria-label="Open email form"
               >
                 <Mail className="w-4 h-4" />
                 Email
@@ -202,7 +200,7 @@ export default function Header() {
         url="https://calendly.com/joshcreatives081200/30min"
         onModalClose={() => setIsCalendlyOpen(false)}
         open={isCalendlyOpen}
-        rootElement={document.getElementById('root') as HTMLElement}
+        rootElement={document.getElementById('root') ?? undefined}
         /*
           Optional: Pre-fill user data if you have it
           prefill={{
@@ -215,14 +213,15 @@ export default function Header() {
       {/* Email Modal */}
       {showEmail && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-xl">
             {/* Close button */}
-            <button 
+            <button
               onClick={() => {
                 setShowEmail(false);
                 setEmailStatus({ type: null, message: '' });
               }}
               className="absolute right-4 top-4 text-gray-400 hover:text-gray-900 transition-colors z-10"
+              aria-label="Close email dialog"
             >
               <X className="w-5 h-5" />
             </button>
@@ -304,8 +303,8 @@ export default function Header() {
                 disabled={isSending}
                 className={`w-full py-3 rounded-lg font-medium transition-colors mt-2 ${
                   isSending
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gray-900 text-white hover:bg-gray-800'
+                    ? 'bg-gray-400 cursor-not-allowed text-white'
+                    : 'bg-indigo-600 text-white hover:bg-indigo-700'
                 }`}
               >
                 {isSending ? 'Sending...' : 'Send Message'}
@@ -331,7 +330,7 @@ export default function Header() {
       {/* Portfolio Modal */}
       {showPortfolio && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-4xl w-full p-6 relative max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-4xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-xl">
             {/* Close button */}
             <button 
               onClick={() => setShowPortfolio(false)}
@@ -349,10 +348,10 @@ export default function Header() {
             {/* Portfolio Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {portfolioProjects.map((project, index) => (
-                <div key={index} className="group border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all hover:border-gray-900">
+                <div key={index} className="group border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition transform hover:-translate-y-1 hover:scale-[1.02] hover:border-gray-900">
                   {/* Image Placeholder - Replace with actual images */}
                   <div className="h-40 bg-gradient-to-br from-gray-900 to-gray-700 flex items-center justify-center">
-                    <span className="text-white text-4xl opacity-50">🎨</span>
+                    <span className="text-white text-4xl opacity-60">🎨</span>
                   </div>
                   
                   {/* Content */}
