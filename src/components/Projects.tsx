@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Globe, Sparkles, Palette, Code, Video, ChevronDown, ChevronUp } from 'lucide-react';
+import { ExternalLink, Globe, Sparkles, Palette, Video, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import SocialLinks from './SocialLinks';
 
@@ -27,15 +27,7 @@ export default function Projects(props: Props) {
       icon: Globe,
       color: 'from-gray-900 to-gray-800',
     },
-    {
-      title: 'CODECHUM Projects',
-      description: 'Front-end development and UI/UX design for various client projects.',
-      link: '#',
-      category: 'Web Development',
-      tags: ['React', 'Tailwind CSS', 'UI/UX'],
-      icon: Code,
-      color: 'from-gray-800 to-gray-700',
-    },
+    
     
     // Graphic Design Projects
     {
@@ -66,25 +58,10 @@ export default function Projects(props: Props) {
       color: 'from-gray-900 to-gray-800',
     },
     
-    // Personal Projects
-    {
-      title: 'Portfolio 2025',
-      description: 'Personal portfolio website showcasing creative and development work.',
-      link: '#',
-      category: 'Personal',
-      tags: ['React', 'Tailwind', 'Design'],
-      icon: Code,
-      color: 'from-gray-800 to-gray-700',
-    },
+    // Personal projects removed per request
   ];
 
-  const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'wordpress', name: 'WordPress' },
-    { id: 'web', name: 'Web Dev' },
-    { id: 'design', name: 'Design' },
-    { id: 'esports', name: 'Esports' },
-  ];
+  
 
   return (
     <section className="bg-white py-16">

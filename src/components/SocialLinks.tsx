@@ -1,4 +1,4 @@
-import { Linkedin, Github, Instagram, Mail, Calendar, MessageCircle, Globe, MapPin, Heart } from 'lucide-react';
+import { Linkedin, Facebook, Instagram, Mail, Calendar, MessageCircle, Globe, MapPin, Heart } from 'lucide-react';
 
 export default function SocialLinks() {
   return (
@@ -28,13 +28,15 @@ export default function SocialLinks() {
                 <span className="text-sm">LinkedIn</span>
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/JoshCreatives"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <Github className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                  <Facebook className="w-4 h-4 text-gray-600 group-hover:text-white" />
                 </div>
-                <span className="text-sm">GitHub</span>
+                <span className="text-sm">Josh Creatives</span>
               </a>
               <a
                 href="#"
@@ -126,9 +128,14 @@ export default function SocialLinks() {
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               <span className="text-xs text-gray-500">Available now</span>
             </div>
-            <button className="w-full bg-black text-white text-sm py-2 rounded-lg hover:bg-gray-800 transition-colors">
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=joshcreatives081200@gmail.com&su=Project%20Inquiry"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-black text-white text-sm py-2 rounded-lg hover:bg-gray-800 transition-colors inline-flex items-center justify-center"
+            >
               Let's work together
-            </button>
+            </a>
           </div>
         </div>
 
