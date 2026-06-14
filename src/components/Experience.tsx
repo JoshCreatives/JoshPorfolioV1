@@ -238,7 +238,7 @@ export default function Experience(props: Props) {
 
   return (
     <section className="bg-white py-16">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+      <div className="w-full">
         {/* Section Header */}
         {!hideHeader && (
         <div className="flex items-center gap-3 mb-10">

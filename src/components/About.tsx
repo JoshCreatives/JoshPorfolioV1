@@ -30,7 +30,7 @@ export default function About(props: Props) {
 
   return (
     <section className="bg-white py-6">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+      <div className="w-full">
         {/* Minimal Section Header */}
         {!hideHeader && (
         <div className="flex items-center gap-3 mb-6">

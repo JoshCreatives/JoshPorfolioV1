@@ -137,7 +137,7 @@ export default function Header({ onToggleAbout, onToggleExp, onToggleProj, onTog
 
   return (
     <header className="bg-white py-4">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 pb-2 pt-4">
+      <div className="pb-[15px] pt-0">
         {/* Top Row - Logo and Name on Same Line */}
         <div className="flex items-center justify-start md:justify-center mb-4">
           <div className="flex items-center gap-4">
@@ -171,7 +171,7 @@ export default function Header({ onToggleAbout, onToggleExp, onToggleProj, onTog
         </div>
 
         {/* Mobile burger (small screens) */}
-        <div className="absolute right-6 top-6 md:hidden">
+        <div className="absolute right-[15px] md:right-6 top-6 md:hidden">
           <button
             onClick={() => setMobileMenuOpen((s) => !s)}
             aria-expanded={mobileMenuOpen}

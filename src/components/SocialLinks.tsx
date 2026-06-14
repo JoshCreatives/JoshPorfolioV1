@@ -3,7 +3,7 @@ import { Linkedin, Github, Instagram, Mail, Calendar, MessageCircle, Globe, MapP
 export default function SocialLinks() {
   return (
     <section className="bg-white py-10 border-t border-gray-100 mb-[50px]">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="w-full">
         {/* Section Header */}
         <div className="flex items-center gap-2 mb-6">
           <div className="w-1 h-5 bg-black"></div>
