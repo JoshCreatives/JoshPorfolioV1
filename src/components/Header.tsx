@@ -8,9 +8,13 @@ type HeaderProps = {
   onToggleAbout?: () => void;
   onToggleExp?: () => void;
   onToggleProj?: () => void;
+  onOpenAbout?: () => void;
+  onOpenExp?: () => void;
+  onOpenProj?: () => void;
 };
 
-export default function Header({ onToggleAbout, onToggleExp, onToggleProj }: HeaderProps) {
+export default function Header(props: HeaderProps) {
+  const { onOpenAbout, onOpenExp, onOpenProj } = props;
   const [showEmail, setShowEmail] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -202,23 +206,19 @@ export default function Header({ onToggleAbout, onToggleExp, onToggleProj }: Hea
               </button>
             </div>
             <div className="h-full flex flex-col items-center justify-center gap-6 p-6">
-              <button onClick={() => { onToggleAbout?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+              <button onClick={() => { onOpenAbout?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
                 <span>ABOUT</span>
                 <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
-              <button onClick={() => { onToggleExp?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+              <button onClick={() => { onOpenExp?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
                 <span>EXPERIENCE</span>
                 <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
-              <button onClick={() => { onToggleProj?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+              <button onClick={() => { onOpenProj?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
                 <span>PROJECTS</span>
                 <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
-                <button onClick={() => { setMobileMenuOpen(false); window.open(resumeUrl, '_blank'); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
-                <span>RESUME</span>
-                <ChevronRight className="w-5 h-5 text-gray-600" />
-              </button>
-              {/* CONTACT removed from mobile menu per request */}
+                {/* Removed resume from mobile nav per request */}
             </div>
           </aside>
         </div>

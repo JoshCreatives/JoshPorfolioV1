@@ -28,6 +28,12 @@ function App() {
     });
   };
 
+  const openAbout = () => {
+    setAboutExpanded(true);
+    setExpExpanded(false);
+    setProjExpanded(false);
+  };
+
   const toggleExp = () => {
     setExpExpanded((prev) => {
       const next = !prev;
@@ -37,6 +43,12 @@ function App() {
       }
       return next;
     });
+  };
+
+  const openExp = () => {
+    setExpExpanded(true);
+    setAboutExpanded(false);
+    setProjExpanded(false);
   };
 
   const toggleProj = () => {
@@ -50,6 +62,12 @@ function App() {
     });
   };
 
+  const openProj = () => {
+    setProjExpanded(true);
+    setAboutExpanded(false);
+    setExpExpanded(false);
+  };
+
   
 
   return (
@@ -59,6 +77,9 @@ function App() {
           onToggleAbout={toggleAbout}
           onToggleExp={toggleExp}
           onToggleProj={toggleProj}
+          onOpenAbout={openAbout}
+          onOpenExp={openExp}
+          onOpenProj={openProj}
         />
 
         {/* Top-row compact controls for the three sections (30px gap, titles close together) */}

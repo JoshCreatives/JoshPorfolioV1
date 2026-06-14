@@ -26,7 +26,7 @@ export default function About(props: Props) {
   const stats = [
     { icon: Briefcase, value: '150+', label: 'Projects', color: 'from-gray-900 to-gray-700' },
     { icon: Users, value: '100+', label: 'Happy Clients', color: 'from-gray-800 to-gray-600' },
-    { icon: Award, value: '5+', label: 'Years Experience', color: 'from-gray-900 to-gray-700' },
+    { icon: Award, value: '2', label: 'Years Experience', color: 'from-gray-900 to-gray-700' },
   ];
 
   return (
@@ -67,7 +67,7 @@ export default function About(props: Props) {
               </p>
               
               <p className="text-gray-600 leading-relaxed">
-                Based in Manila, working with startups and businesses worldwide to create 
+                Based in Surigao del Norte, working with startups and businesses worldwide to create 
                 websites, brands, and content that connect with audiences.
               </p>
             </div>

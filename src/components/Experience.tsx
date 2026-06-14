@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Heart, Code, Palette, Globe, Sparkles, X, Calendar, MapPin, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { Briefcase, GraduationCap, Heart, Palette, Globe, Sparkles, X, Calendar, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 import SocialLinks from './SocialLinks';
 
@@ -41,15 +41,15 @@ export default function Experience(props: Props) {
   };
 
   const experiences: ExperienceCategory[] = [
-    {
-      category: 'work',
-      items: [
+        {
+          category: 'work',
+          items: [
         {
           id: 'arkdesign',
           title: 'WordPress Developer',
           company: 'ArkDesign.nl',
           location: 'Netherlands (Remote)',
-          year: '2023 - Present',
+          year: '2025 - 2026 - 11mon',
           description: 'Developing and maintaining WordPress websites, custom themes, and plugins for Dutch clients.',
           fullDescription: 'As a WordPress Developer at ArkDesign.nl, I work closely with Dutch clients to create stunning, functional websites that meet their specific business needs. My responsibilities include developing custom WordPress themes from scratch, creating bespoke plugins to extend functionality, optimizing website performance, and ensuring responsive design across all devices. I collaborate with the design team to translate Figma designs into pixel-perfect WordPress implementations, and provide ongoing maintenance and security updates for client websites.',
           icon: Globe,
@@ -68,34 +68,11 @@ export default function Experience(props: Props) {
           technologies: ['WordPress', 'PHP', 'JavaScript', 'MySQL', 'WooCommerce', 'Elementor'],
         },
         {
-          id: 'codechum',
-          title: 'Front End Developer & Designer',
-          company: 'CODECHUM',
-          location: 'Philippines',
-          year: '2022 - Present',
-          description: 'Building modern web applications and creating UI/UX designs for various projects.',
-          fullDescription: 'At CODECHUM, I bridge the gap between design and development, creating intuitive user interfaces and implementing them with clean, efficient code. I work on a variety of projects ranging from educational platforms to business applications, ensuring that every user interaction is smooth and meaningful. My role involves both designing UI/UX mockups in Figma and translating them into responsive React applications, as well as mentoring junior developers and contributing to code reviews.',
-          icon: Code,
-          color: 'bg-gray-800',
-          images: [
-            'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-          ],
-          achievements: [
-            'Built 10+ responsive web applications using React',
-            'Redesigned the company website, increasing user engagement by 35%',
-            'Created a component library used across multiple projects',
-            'Mentored 3 junior developers in front-end best practices',
-          ],
-          technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'UI/UX Design', 'Next.js'],
-        },
-        {
           id: 'siit',
           title: 'Graphic Designer',
           company: 'SIIT - Siargao Island Institute of Technology',
           location: 'Siargao, Philippines',
-          year: '2021 - Present',
+          year: '2022 - 2026 - Present',
           description: 'Creating marketing materials, branding, and visual content for the institute.',
           fullDescription: 'Working with SIIT, I develop and maintain the visual identity of the institute across all platforms. This includes creating marketing materials for student recruitment, designing event posters and social media graphics, developing branded templates for presentations, and ensuring brand consistency across all communications. I work closely with the marketing team to understand their needs and translate concepts into compelling visual designs that resonate with students and faculty.',
           icon: Palette,
@@ -118,7 +95,7 @@ export default function Experience(props: Props) {
           title: 'Graphic Designer',
           company: 'SUYO - Siargao United Youth Organization',
           location: 'Siargao, Philippines',
-          year: '2020 - Present',
+          year: '2024 - 2025 - 1yr',
           description: 'Designing promotional materials and visual assets for youth organization events and initiatives.',
           fullDescription: 'As a volunteer graphic designer for SUYO, I create visual assets that help promote youth engagement and community development in Siargao. I design posters for events and workshops, create social media content to reach young people, and develop branding materials for youth-led initiatives. This role allows me to give back to my community while honing my design skills and understanding the unique needs of non-profit organizations.',
           icon: Heart,
@@ -141,7 +118,7 @@ export default function Experience(props: Props) {
           title: 'Graphic Designer',
           company: 'Pilar Esports',
           location: 'Siargao, Philippines',
-          year: '2020 - Present',
+          year: '2020 - 2026 - Present',
           description: 'Creating esports branding, team logos, tournament graphics, and social media content.',
           fullDescription: 'For Pilar Esports, I create dynamic, gaming-inspired designs that capture the energy and excitement of competitive gaming. I design team logos that represent the identity of each squad, create tournament brackets and graphics for livestreams, and develop social media content to engage the gaming community in Siargao. This role combines my passion for gaming with my design skills, allowing me to create visuals that resonate with the esports audience.',
           icon: Sparkles,
@@ -167,11 +144,11 @@ export default function Experience(props: Props) {
         {
           id: 'usc',
           title: 'BS Information Technology',
-          company: 'University of San Carlos',
-          location: 'Cebu, Philippines',
-          year: '2015 - 2019',
+          company: 'Siargao Island Institute of Technology',
+          location: 'Surigao del Norte, Philippines',
+          year: '2022 - 2026',
           description: 'Major in Web Development and Design',
-          fullDescription: 'I completed my Bachelor of Science in Information Technology at the University of San Carlos, with a focus on Web Development and Design. During my time at university, I built a strong foundation in programming principles, database management, and web technologies. I was actively involved in student organizations and participated in several hackathons, which helped me develop practical skills and learn to work in team environments.',
+          fullDescription: 'I completed my Bachelor of Science in Information Technology at the Siargao Island Institute of Technology, with a focus on Web Development and Design. During my time at university, I built a strong foundation in programming principles, database management, and web technologies. I was actively involved in student organizations and participated in several hackathons, which helped me develop practical skills and learn to work in team environments.',
           icon: GraduationCap,
           color: 'bg-gray-800',
           images: [
@@ -344,24 +321,12 @@ export default function Experience(props: Props) {
               EXPERTISE HIGHLIGHTS
             </h4>
             <div className="flex flex-wrap gap-2">
-              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200 flex items-center gap-1">
-                <Code className="w-3 h-3" /> Front-End Dev
-              </span>
-              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200 flex items-center gap-1">
-                <Globe className="w-3 h-3" /> WordPress
-              </span>
-              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200 flex items-center gap-1">
-                <Palette className="w-3 h-3" /> Graphic Design
-              </span>
-              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200 flex items-center gap-1">
-                <Sparkles className="w-3 h-3" /> UI/UX Design
-              </span>
-              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200 flex items-center gap-1">
-                🎮 Esports Design
-              </span>
-              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200 flex items-center gap-1">
-                🏝️ Siargao-Based
-              </span>
+              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200">Front-End Dev</span>
+              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200">WordPress</span>
+              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200">Graphic Design</span>
+              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200">UI/UX Design</span>
+              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200">Esports Design</span>
+              <span className="bg-white px-3 py-1.5 rounded-full text-xs border border-gray-200">Siargao-Based</span>
             </div>
           </div>
         </div>

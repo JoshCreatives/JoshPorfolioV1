@@ -72,7 +72,7 @@ export default function SocialLinks() {
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
                   <Mail className="w-4 h-4 text-gray-600 group-hover:text-white" />
                 </div>
-                <span className="text-sm">josh@joshcreatives.com</span>
+                <span className="text-sm">joshcreatives081200@gmail.com</span>
               </a>
               <a
                 href="#"

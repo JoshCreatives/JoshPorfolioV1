@@ -88,7 +88,7 @@ export default function Chatbot() {
 
     // Contact Information
     if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('reach') || lowerMessage.includes('message') || lowerMessage.includes('get in touch') || lowerMessage.includes('phone') || lowerMessage.includes('call')) {
-      return "📬 **Contact Information**\n\nYou can reach Josh Creatives through:\n\n✉️ **Email:** josh@joshcreatives.com\n📅 **Schedule a Call:** Use the 'Commission Now' button below\n📍 **Location:** Pilaring, Pilar Surigao Del Norte\n🌍 **Available:** Worldwide remote\n\nI aim to respond to all inquiries within 24 hours. Looking forward to connecting with you!";
+      return "📬 **Contact Information**\n\nYou can reach Josh Creatives through:\n\n✉️ **Email:** joshcreatives081200@gmail.com\n📅 **Schedule a Call:** Use the 'Commission Now' button below\n📍 **Location:** Pilaring, Pilar Surigao Del Norte\n🌍 **Available:** Worldwide remote\n\nI aim to respond to all inquiries within 24 hours. Looking forward to connecting with you!";
     }
 
     // Web Development
