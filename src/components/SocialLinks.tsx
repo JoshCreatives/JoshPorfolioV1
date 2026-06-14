@@ -10,7 +10,7 @@ export default function SocialLinks() {
           <h2 className="text-sm font-medium text-gray-400 tracking-wider">CONNECT</h2>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-4 gap-y-6 gap-x-16">
           {/* Column 1: Social Links */}
           <div>
             <h3 className="font-medium text-gray-900 text-sm mb-3 flex items-center gap-2">
@@ -23,7 +23,7 @@ export default function SocialLinks() {
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <Linkedin className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                  <Linkedin className="w-4 h-4 text-gray-600 group-hover:text-white translate-y-px" />
                 </div>
                 <span className="text-sm">LinkedIn</span>
               </a>
@@ -34,7 +34,7 @@ export default function SocialLinks() {
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <Facebook className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                  <Facebook className="w-4 h-4 text-gray-600 group-hover:text-white translate-y-px" />
                 </div>
                 <span className="text-sm">Josh Creatives</span>
               </a>
@@ -43,7 +43,7 @@ export default function SocialLinks() {
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <Instagram className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                  <Instagram className="w-4 h-4 text-gray-600 group-hover:text-white translate-y-px" />
                 </div>
                 <span className="text-sm">Instagram</span>
               </a>
@@ -52,7 +52,7 @@ export default function SocialLinks() {
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <MessageCircle className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                  <MessageCircle className="w-4 h-4 text-gray-600 group-hover:text-white translate-y-px" />
                 </div>
                 <span className="text-sm">Discord</span>
               </a>
@@ -60,7 +60,7 @@ export default function SocialLinks() {
           </div>
 
           {/* Column 2: Contact */}
-          <div>
+          <div className="mr-2.5">
             <h3 className="font-medium text-gray-900 text-sm mb-3 flex items-center gap-2">
               <span className="w-1 h-4 bg-black rounded-full"></span>
               Contact
@@ -71,29 +71,29 @@ export default function SocialLinks() {
                 href="mailto:josh@joshcreatives.com"
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
-                <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <Mail className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                <div className="w-7 h-7  bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
+                  <Mail className="w-4 h-4 text-gray-600 group-hover:text-white translate-y-px" />
                 </div>
-                <span className="text-sm">joshcreatives081200@gmail.com</span>
+                <span className="text-sm max-w-full md:max-w-[9rem] break-words whitespace-normal">joshcreatives081200@gmail.com</span>
               </a>
               <a
                 href="#"
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors group"
               >
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-900 transition-colors">
-                  <Calendar className="w-4 h-4 text-gray-600 group-hover:text-white" />
+                  <Calendar className="w-4 h-4 text-gray-600 group-hover:text-white translate-y-px" />
                 </div>
                 <span className="text-sm">Schedule a Call</span>
               </a>
               <div className="flex items-center gap-3 text-gray-600">
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <MapPin className="w-4 h-4 text-gray-600" />
+                  <MapPin className="w-4 h-4 text-gray-600 translate-y-px" />
                 </div>
                 <span className="text-sm">Pilaring, Pilar Surigao Del Norte</span>
               </div>
               <div className="flex items-center gap-3 text-gray-600">
                 <div className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <Globe className="w-4 h-4 text-gray-600" />
+                  <Globe className="w-4 h-4 text-gray-600 translate-y-px" />
                 </div>
                 <span className="text-sm">Available worldwide</span>
               </div>
@@ -118,7 +118,7 @@ export default function SocialLinks() {
           {/* Column 4: Availability & CTA */}
           <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
             <div className="flex items-center gap-2 mb-3">
-              <Heart className="w-4 h-4 text-gray-900" />
+                  <Heart className="w-4 h-4 text-gray-900 translate-y-px" />
               <h3 className="font-medium text-gray-900 text-sm">Open for work</h3>
             </div>
             <p className="text-xs text-gray-600 mb-3">

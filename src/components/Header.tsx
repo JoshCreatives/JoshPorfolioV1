@@ -2,7 +2,7 @@ import { MapPin, Calendar, Mail, X, Menu, ChevronLeft, ChevronRight } from 'luci
 import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { PopupModal } from 'react-calendly';
-import resumeUrl from '../assets/Josh Resume(1).pdf';
+import resumeUrl from '../assets/Josh Creatives Resume.pdf';
 
 type HeaderProps = {
   onToggleAbout?: () => void;
@@ -374,7 +374,7 @@ export default function Header(props: HeaderProps) {
                 className={`w-full py-3 rounded-lg font-medium transition-colors mt-2 ${
                   isSending
                     ? 'bg-gray-400 cursor-not-allowed text-white'
-                    : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                    : 'bg-black text-white hover:bg-gray-900'
                 }`}
               >
                 {isSending ? 'Sending...' : 'Send Message'}

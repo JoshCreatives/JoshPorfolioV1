@@ -67,8 +67,7 @@ export default function About(props: Props) {
               </p>
               
               <p className="text-gray-600 leading-relaxed">
-                Based in Surigao del Norte, working with startups and businesses worldwide to create 
-                websites, brands, and content that connect with audiences.
+                Based in Surigao del Norte, we work with businesses and organizations worldwide, crafting websites, visual identities, marketing materials, and content that connect with audiences and strengthen brands.
               </p>
             </div>
 
