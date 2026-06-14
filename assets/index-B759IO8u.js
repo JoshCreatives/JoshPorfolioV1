@@ -212,7 +212,7 @@ Error generating stack: `+e.message+`
 
 I'd love to help! Here's how you can commission Josh Creatives:
 
-📧 **Email:** josh@joshcreatives.com
+📧 **Email:** joshcreatives081200@gmail.com
 📞 **Schedule a Call:** Click the button below
 💬 **Tell me about your project:** What do you need help with?
 
