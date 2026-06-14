@@ -1,5 +1,6 @@
 import { ExternalLink, Github, Globe, Sparkles, Palette, Code, Video, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import SocialLinks from './SocialLinks';
 
 type Props = {
   expanded?: boolean;
@@ -105,6 +106,8 @@ export default function Projects(props: Props) {
         </div>
         )}
 
+        {/* Contact moved to page bottom */}
+
             {/* Category filters removed per request */}
 
             {expanded && (
@@ -195,6 +198,7 @@ export default function Projects(props: Props) {
         </div>
           </>
         )}
+        {expanded && <div className="mt-8"><SocialLinks /></div>}
       </div>
     </section>
   );

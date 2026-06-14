@@ -2,15 +2,15 @@ import { MapPin, Calendar, Mail, X, Menu, ChevronLeft, ChevronRight } from 'luci
 import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { PopupModal } from 'react-calendly';
+import resumeUrl from '../assets/Josh Resume(1).pdf';
 
 type HeaderProps = {
   onToggleAbout?: () => void;
   onToggleExp?: () => void;
   onToggleProj?: () => void;
-  onToggleConnect?: () => void;
 };
 
-export default function Header({ onToggleAbout, onToggleExp, onToggleProj, onToggleConnect }: HeaderProps) {
+export default function Header({ onToggleAbout, onToggleExp, onToggleProj }: HeaderProps) {
   const [showEmail, setShowEmail] = useState(false);
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -214,10 +214,11 @@ export default function Header({ onToggleAbout, onToggleExp, onToggleProj, onTog
                 <span>PROJECTS</span>
                 <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
-              <button onClick={() => { onToggleConnect?.(); setMobileMenuOpen(false); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
-                <span>CONTACT</span>
+                <button onClick={() => { setMobileMenuOpen(false); window.open(resumeUrl, '_blank'); }} className="flex items-center gap-3 text-2xl font-semibold tracking-wider">
+                <span>RESUME</span>
                 <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
+              {/* CONTACT removed from mobile menu per request */}
             </div>
           </aside>
         </div>
@@ -249,6 +250,15 @@ export default function Header({ onToggleAbout, onToggleExp, onToggleProj, onTog
                 <Mail className="w-4 h-4" />
                 Email
               </button>
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  aria-label="View resume"
+                >
+                  Resume
+                </a>
               {/* Portfolio button removed */}
             </div>
           </div>

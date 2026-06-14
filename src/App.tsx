@@ -4,7 +4,6 @@ import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 // import Certifications from './components/Certifications';
-import SocialLinks from './components/SocialLinks';
 // import Gallery from './components/Gallery';
 // import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
@@ -17,7 +16,6 @@ function App() {
   const [aboutExpanded, setAboutExpanded] = useState(true);
   const [expExpanded, setExpExpanded] = useState(false);
   const [projExpanded, setProjExpanded] = useState(false);
-  const [connectExpanded, setConnectExpanded] = useState(false);
 
   const toggleAbout = () => {
     setAboutExpanded((prev) => {
@@ -52,17 +50,7 @@ function App() {
     });
   };
 
-  const toggleConnect = () => {
-    setConnectExpanded((prev) => {
-      const next = !prev;
-      if (next) {
-        setAboutExpanded(false);
-        setExpExpanded(false);
-        setProjExpanded(false);
-      }
-      return next;
-    });
-  };
+  
 
   return (
     <div className="min-h-screen bg-white">
@@ -71,7 +59,6 @@ function App() {
           onToggleAbout={toggleAbout}
           onToggleExp={toggleExp}
           onToggleProj={toggleProj}
-          onToggleConnect={toggleConnect}
         />
 
         {/* Top-row compact controls for the three sections (30px gap, titles close together) */}
@@ -113,17 +100,7 @@ function App() {
               </button>
             </div>
 
-            <div className="flex items-center gap-2 px-2">
-              <h2 className="text-xs sm:text-sm md:text-lg font-light tracking-tight text-gray-900">CONTACT</h2>
-              <button
-                onClick={toggleConnect}
-                className="p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors flex items-center"
-                aria-expanded={connectExpanded}
-                aria-label={connectExpanded ? 'Hide Contact' : 'Show Contact'}
-              >
-                {connectExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-            </div>
+            {/* CONTACT removed from top-row controls */}
           </div>
         </div>
 
@@ -132,7 +109,6 @@ function App() {
           {aboutExpanded && <About expanded hideHeader />}
           {expExpanded && <Experience expanded hideHeader />}
           {projExpanded && <Projects expanded hideHeader />}
-          {connectExpanded && <SocialLinks />}
         </div>
 
         {/* Footer: compact note only (full contact lives inside CONTACT) */}

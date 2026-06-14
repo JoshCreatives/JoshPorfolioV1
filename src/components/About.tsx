@@ -1,5 +1,6 @@
 import { Code, Users, Briefcase, Award, Globe, Palette, Video, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import SocialLinks from './SocialLinks';
 
 type Props = {
   expanded?: boolean;
@@ -48,6 +49,8 @@ export default function About(props: Props) {
         </div>
 
         )}
+
+        {/* Contact shown at bottom of expanded section */}
 
         {expanded && (
           <div className="grid md:grid-cols-3 gap-8">
@@ -149,6 +152,7 @@ export default function About(props: Props) {
           </div>
         </div>
         )}
+        {expanded && <div className="mt-8"><SocialLinks /></div>}
       </div>
     </section>
   );

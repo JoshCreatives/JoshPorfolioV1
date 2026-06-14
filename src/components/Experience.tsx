@@ -1,5 +1,6 @@
 import { Briefcase, GraduationCap, Heart, Code, Palette, Globe, Sparkles, X, Calendar, MapPin, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import SocialLinks from './SocialLinks';
 
 // Types for experience data
 interface ExperienceItem {
@@ -237,7 +238,7 @@ export default function Experience(props: Props) {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-6">
       <div className="w-full">
         {/* Section Header */}
         {!hideHeader && (
@@ -255,6 +256,8 @@ export default function Experience(props: Props) {
           </button>
         </div>
         )}
+
+        {/* Contact moved to page bottom */}
 
         {/* Experience Timeline */}
         {expanded && (
@@ -369,6 +372,7 @@ export default function Experience(props: Props) {
             ✦ Currently available for freelance work • 5+ years of combined experience ✦
           </p>
         </div>
+        {expanded && <div className="mt-8"><SocialLinks /></div>}
         </>
         )}
       </div>
@@ -477,23 +481,7 @@ export default function Experience(props: Props) {
                 </div>
               )}
 
-              {/* Contact CTA */}
-              <div className="mt-6 pt-4 border-t border-gray-200">
-                <p className="text-xs text-gray-500 text-center">
-                  Want to know more about this experience? {' '}
-                  <a 
-                    href="#" 
-                    className="text-gray-900 font-medium hover:underline inline-flex items-center gap-1"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert('Contact me for more details!');
-                    }}
-                  >
-                    Let's talk
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </p>
-              </div>
+              {/* Contact CTA removed to avoid duplicate footer content; contact available in section bottom */}
             </div>
           </div>
         </div>
