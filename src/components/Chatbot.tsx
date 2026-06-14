@@ -83,7 +83,7 @@ export default function Chatbot() {
 
     // Commission / Hire / Work Together
     if (lowerMessage.includes('commission') || lowerMessage.includes('hire') || lowerMessage.includes('work together') || lowerMessage.includes('project') || lowerMessage.includes('collaborate') || lowerMessage.includes('quote') || lowerMessage.includes('estimate')) {
-      return "🎨 **Ready to start a project?**\n\nI'd love to help! Here's how you can commission Josh Creatives:\n\n📧 **Email:** josh@joshcreatives.com\n📞 **Schedule a Call:** Click the button below\n💬 **Tell me about your project:** What do you need help with?\n\nI typically respond within 24 hours. Let's create something amazing together! ✨";
+      return "🎨 **Ready to start a project?**\n\nI'd love to help! Here's how you can commission Josh Creatives:\n\n📧 **Email:** joshcreatives081200@gmail.com\n📞 **Schedule a Call:** Click the button below\n💬 **Tell me about your project:** What do you need help with?\n\nI typically respond within 24 hours. Let's create something amazing together! ✨";
     }
 
     // Contact Information
